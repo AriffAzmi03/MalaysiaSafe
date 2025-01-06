@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200480760784",
+    "project_id": "malaysiasafe-150fb",
+    "storage_bucket": "malaysiasafe-150fb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200480760784:android:8fb2e372bbfb6a46884fd5",
+        "android_client_info": {
+          "package_name": "com.example.malaysiasafe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW5AUJeXcHoB-f7sipY1CdhatDrErJrTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

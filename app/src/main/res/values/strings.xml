@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MalaysiaSafe</string>
+
+    <!-- User Roles Array -->
+    <string-array name="user_roles">
+        <item>User</item>
+        <item>Admin</item>
+    </string-array>
+
+</resources>
