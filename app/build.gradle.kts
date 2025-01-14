@@ -46,6 +46,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth") // Firebase Auth Dependency
     implementation ("com.google.firebase:firebase-database")
 
+    implementation ("org.osmdroid:osmdroid-android:6.1.10")
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
