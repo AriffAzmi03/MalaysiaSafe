@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+    <!-- android:background="@android:color/white" -->
 
     <TextView
         android:id="@+id/offlineDataView"
@@ -13,4 +14,15 @@
         android:textSize="18sp"
         android:gravity="center"
         android:padding="16dp" />
+        <!-- android:textColor="@android:color/black" -->
+        <!-- android:background="@android:color/white"
+        android:lineSpacingExtra="4dp" /> -->
+
+    <Button
+        android:id="@+id/dashboardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Go to Dashboard"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
