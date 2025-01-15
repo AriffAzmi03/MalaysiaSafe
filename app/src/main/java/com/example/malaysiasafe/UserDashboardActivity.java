@@ -63,9 +63,13 @@ public class UserDashboardActivity extends AppCompatActivity {
                     break;
                 case 4: // Emergency
                     // Navigate to EmergencyActivity
+                    Intent emergencyIntent = new Intent(UserDashboardActivity.this, EmergencyActivity.class);
+                    startActivity(emergencyIntent);
                     break;
                 case 5: // Report
                     // Navigate to ReportActivity
+                    Intent reportIntent = new Intent(UserDashboardActivity.this, ReportActivity.class);
+                    startActivity(reportIntent);
                     break;
                 default:
                     break;

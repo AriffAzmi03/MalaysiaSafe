@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/emergencyDialPadTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Dial Pad"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Phone Number Display -->
+    <TextView
+        android:id="@+id/phoneNumberDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emergencyDialPadTitle"
+        android:layout_marginTop="8dp"
+        android:textSize="22sp"
+        android:gravity="center_horizontal"
+        android:background="#EEEEEE"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Dial Pad GridLayout -->
+
+    <!-- Predefined Emergency Buttons -->
+    <GridLayout
+        android:id="@+id/dialPadGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/phoneNumberDisplay"
+        android:layout_centerHorizontal="true"
+        android:columnCount="3"
+        android:rowCount="4"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp">
+
+
+        <!-- Dial Pad Buttons -->
+        <Button
+            android:id="@+id/button1"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="1"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="2"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button3"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="3"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button4"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="4"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button5"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="5"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button6"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="6"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button7"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="7"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button8"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="8"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button9"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="9"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buttonStar"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="*"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button0"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="0"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buttonHash"
+            style="@style/RoundButton"
+            android:background="@drawable/round_button_white"
+            android:text="#"
+            android:textSize="18sp" />
+
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialPadGrid"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/buttonPolice"
+            style="@style/RoundButton"
+            android:text="Police"
+            android:background="@drawable/round_button_white"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/buttonFire"
+            style="@style/RoundButton"
+            android:text="Fire"
+            android:background="@drawable/round_button_white"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/buttonAmbulance"
+            style="@style/RoundButton"
+            android:text="Ambulance"
+            android:background="@drawable/round_button_white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/backspaceButton"
+            style="@style/RoundActionButton"
+            android:text="←"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/callButton"
+            style="@style/RoundActionButton"
+            android:text="Call"
+            android:background="@drawable/round_button_green"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/clearButton"
+            style="@style/RoundActionButton"
+            android:text="Clear"
+            android:visibility="gone" />
+    </LinearLayout>
+</RelativeLayout>
