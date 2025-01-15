@@ -46,40 +46,76 @@ public class MapsActivity extends AppCompatActivity {
         GeoPoint startPoint = new GeoPoint(4.210484, 101.975766); // Center point in Malaysia
         mapController.setCenter(startPoint);
 
-        // Add a marker for a disaster-prone area
-        Marker disasterMarker = new Marker(map);
-        disasterMarker.setPosition(new GeoPoint(4.5, 102.0)); // Example location
-        disasterMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        disasterMarker.setTitle("Disaster-Prone Area");
-        map.getOverlays().add(disasterMarker);
-
-        // Add a polygon to mark a disaster-prone area
-        Polygon disasterArea = new Polygon(map);
-        List<GeoPoint> polygonPoints = new ArrayList<>();
-        polygonPoints.add(new GeoPoint(4.4, 101.9));
-        polygonPoints.add(new GeoPoint(4.4, 102.1));
-        polygonPoints.add(new GeoPoint(4.6, 102.1));
-        polygonPoints.add(new GeoPoint(4.6, 101.9));
-        disasterArea.setPoints(polygonPoints);
-        disasterArea.setFillColor(0x44FF0000); // Semi-transparent red
-        disasterArea.setStrokeColor(0xFFFF0000); // Red border
-        disasterArea.setTitle("High-Risk Flood Zone");
-        map.getOverlays().add(disasterArea);
-
-        // Add a polyline for an evacuation route
-        Polyline evacuationRoute = new Polyline(map);
-        List<GeoPoint> routePoints = new ArrayList<>();
-        routePoints.add(new GeoPoint(4.5, 101.9));
-        routePoints.add(new GeoPoint(4.55, 101.95));
-        routePoints.add(new GeoPoint(4.6, 102.0));
-        evacuationRoute.setPoints(routePoints);
-        evacuationRoute.setColor(0xFF0000FF); // Blue color
-        evacuationRoute.setTitle("Evacuation Route");
-        map.getOverlays().add(evacuationRoute);
+        // Add disaster-prone areas and evacuation routes
+        addDisasterAndEvacuationData();
 
         // Add button to navigate to User Dashboard
         Button dashboardButton = findViewById(R.id.dashboardButton);
         dashboardButton.setOnClickListener(v -> navigateToUserDashboard());
+    }
+
+    private void addDisasterAndEvacuationData() {
+        // Disaster-Prone Area 1
+        Marker disasterMarker1 = new Marker(map);
+        disasterMarker1.setPosition(new GeoPoint(4.5, 102.0)); // Example location
+        disasterMarker1.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        disasterMarker1.setTitle("Disaster-Prone Area 1");
+        map.getOverlays().add(disasterMarker1);
+
+        // Disaster Area Polygon 1
+        Polygon disasterArea1 = new Polygon(map);
+        List<GeoPoint> polygonPoints1 = new ArrayList<>();
+        polygonPoints1.add(new GeoPoint(4.4, 101.9));
+        polygonPoints1.add(new GeoPoint(4.4, 102.1));
+        polygonPoints1.add(new GeoPoint(4.6, 102.1));
+        polygonPoints1.add(new GeoPoint(4.6, 101.9));
+        disasterArea1.setPoints(polygonPoints1);
+        disasterArea1.setFillColor(0x44FF0000); // Semi-transparent red
+        disasterArea1.setStrokeColor(0xFFFF0000); // Red border
+        disasterArea1.setTitle("High-Risk Flood Zone");
+        map.getOverlays().add(disasterArea1);
+
+        // Evacuation Route 1
+        Polyline evacuationRoute1 = new Polyline(map);
+        List<GeoPoint> routePoints1 = new ArrayList<>();
+        routePoints1.add(new GeoPoint(4.5, 101.9));
+        routePoints1.add(new GeoPoint(4.55, 101.95));
+        routePoints1.add(new GeoPoint(4.6, 102.0));
+        evacuationRoute1.setPoints(routePoints1);
+        evacuationRoute1.setColor(0xFF0000FF); // Blue color
+        evacuationRoute1.setTitle("Evacuation Route 1");
+        map.getOverlays().add(evacuationRoute1);
+
+        // Additional Disaster-Prone Area 2
+        Marker disasterMarker2 = new Marker(map);
+        disasterMarker2.setPosition(new GeoPoint(4.8, 103.0)); // Example location
+        disasterMarker2.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        disasterMarker2.setTitle("Disaster-Prone Area 2");
+        map.getOverlays().add(disasterMarker2);
+
+        // Disaster Area Polygon 2
+        Polygon disasterArea2 = new Polygon(map);
+        List<GeoPoint> polygonPoints2 = new ArrayList<>();
+        polygonPoints2.add(new GeoPoint(4.7, 102.8));
+        polygonPoints2.add(new GeoPoint(4.7, 103.2));
+        polygonPoints2.add(new GeoPoint(4.9, 103.2));
+        polygonPoints2.add(new GeoPoint(4.9, 102.8));
+        disasterArea2.setPoints(polygonPoints2);
+        disasterArea2.setFillColor(0x44FF0000); // Semi-transparent red
+        disasterArea2.setStrokeColor(0xFFFF0000); // Red border
+        disasterArea2.setTitle("Earthquake Risk Zone");
+        map.getOverlays().add(disasterArea2);
+
+        // Evacuation Route 2
+        Polyline evacuationRoute2 = new Polyline(map);
+        List<GeoPoint> routePoints2 = new ArrayList<>();
+        routePoints2.add(new GeoPoint(4.8, 102.9));
+        routePoints2.add(new GeoPoint(4.85, 103.0));
+        routePoints2.add(new GeoPoint(4.9, 103.1));
+        evacuationRoute2.setPoints(routePoints2);
+        evacuationRoute2.setColor(0xFF0000FF); // Blue color
+        evacuationRoute2.setTitle("Evacuation Route 2");
+        map.getOverlays().add(evacuationRoute2);
     }
 
     private void navigateToUserDashboard() {

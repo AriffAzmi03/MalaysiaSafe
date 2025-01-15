@@ -40,6 +40,7 @@ dependencies {
     implementation(libs.constraintlayout)
 
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
 
     // Firebase Authentication
     implementation(platform("com.google.firebase:firebase-bom:33.7.0")) // Firebase BoM
