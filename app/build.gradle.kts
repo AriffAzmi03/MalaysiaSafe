@@ -46,6 +46,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.7.0")) // Firebase BoM
     implementation("com.google.firebase:firebase-auth") // Firebase Auth Dependency
     implementation ("com.google.firebase:firebase-database")
+    implementation(libs.firebase.storage)
 
     implementation ("org.osmdroid:osmdroid-android:6.1.10")
 

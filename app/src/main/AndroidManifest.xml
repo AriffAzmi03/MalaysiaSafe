@@ -54,7 +54,8 @@
         <!-- Offline Activity -->
         <activity
             android:name=".OfflineModeActivity"
-            android:exported="true" />
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
     </application>
 
 </manifest>
