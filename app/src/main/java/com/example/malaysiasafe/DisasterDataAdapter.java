@@ -1,57 +1,129 @@
 package com.example.malaysiasafe;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class DisasterDataAdapter extends RecyclerView.Adapter<DisasterDataAdapter.DisasterViewHolder> {
+import java.util.ArrayList;
 
-    private JSONArray disasterData;
+public class DisasterDataAdapter extends BaseAdapter {
+    private final Context context;
+    private final ArrayList<DisasterData> disasterList;
+    private final DatabaseReference disasterDataRef;
 
-    public DisasterDataAdapter(JSONArray disasterData) {
-        this.disasterData = disasterData;
+    public DisasterDataAdapter(Context context, ArrayList<DisasterData> disasterList) {
+        this.context = context;
+        this.disasterList = disasterList;
+        this.disasterDataRef = FirebaseDatabase.getInstance()
+                .getReference("DisasterData");
     }
 
     @Override
-    public DisasterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_disaster_data, parent, false);
-        return new DisasterViewHolder(itemView);
+    public int getCount() {
+        return disasterList.size();
     }
 
     @Override
-    public void onBindViewHolder(DisasterViewHolder holder, int position) {
-        try {
-            JSONObject data = disasterData.getJSONObject(position);
-            holder.locationTextView.setText("Location: " + data.getString("location"));
-            holder.infoTextView.setText("Details: " + data.getString("info"));
-            holder.centerTextView.setText("Evacuation Center: " + data.getString("center"));
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public DisasterData getItem(int position) {
+        return disasterList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_disaster_data, parent, false);
         }
+
+        TextView locationView = convertView.findViewById(R.id.location_text);
+        TextView infoView = convertView.findViewById(R.id.info_text);
+        TextView centerView = convertView.findViewById(R.id.center_text);
+        Button deleteButton = convertView.findViewById(R.id.delete_button);
+        Button updateButton = convertView.findViewById(R.id.update_button);
+
+        DisasterData disasterData = disasterList.get(position);
+        locationView.setText(disasterData.getLocation());
+        infoView.setText(disasterData.getInfo());
+        centerView.setText(disasterData.getCenter());
+
+        // Handle delete action
+        deleteButton.setOnClickListener(view -> deleteDisasterData(disasterData.getId(), position));
+
+        // Handle update action
+        updateButton.setOnClickListener(view -> showUpdateDialog(disasterData));
+
+        return convertView;
     }
 
-    @Override
-    public int getItemCount() {
-        return disasterData.length();
+    private void deleteDisasterData(String id, int position) {
+        disasterDataRef.child(id).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(context, "Data deleted successfully", Toast.LENGTH_SHORT).show();
+                disasterList.remove(position);
+                notifyDataSetChanged();
+            } else {
+                Toast.makeText(context, "Failed to delete data", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    public static class DisasterViewHolder extends RecyclerView.ViewHolder {
-        TextView locationTextView, infoTextView, centerTextView;
+    private void showUpdateDialog(DisasterData disasterData) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View dialogView = inflater.inflate(R.layout.update_disaster_dialog, null);
+        dialogBuilder.setView(dialogView);
 
-        public DisasterViewHolder(View itemView) {
-            super(itemView);
-            locationTextView = itemView.findViewById(R.id.locationTextView);
-            infoTextView = itemView.findViewById(R.id.infoTextView);
-            centerTextView = itemView.findViewById(R.id.centerTextView);
-        }
+        EditText editLocation = dialogView.findViewById(R.id.edit_location);
+        EditText editInfo = dialogView.findViewById(R.id.edit_info);
+        EditText editCenter = dialogView.findViewById(R.id.edit_center);
+        Button updateButton = dialogView.findViewById(R.id.update_button);
+
+        editLocation.setText(disasterData.getLocation());
+        editInfo.setText(disasterData.getInfo());
+        editCenter.setText(disasterData.getCenter());
+
+        AlertDialog dialog = dialogBuilder.create();
+
+        updateButton.setOnClickListener(view -> {
+            String newLocation = editLocation.getText().toString().trim();
+            String newInfo = editInfo.getText().toString().trim();
+            String newCenter = editCenter.getText().toString().trim();
+
+            if (newLocation.isEmpty() || newInfo.isEmpty() || newCenter.isEmpty()) {
+                Toast.makeText(context, "All fields must be filled", Toast.LENGTH_SHORT).show();
+            } else {
+                disasterDataRef.child(disasterData.getId())
+                        .setValue(new DisasterData(newLocation, newInfo, newCenter))
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(context, "Failed to update data", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+        dialog.show();
     }
 }
-

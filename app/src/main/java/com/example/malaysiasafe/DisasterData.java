@@ -1,22 +1,29 @@
-package com.example.malaysiasafe.model;
+package com.example.malaysiasafe;
 
 public class DisasterData {
+    private String id;
     private String location;
     private String info;
     private String center;
 
-    // Default constructor required for Firebase
     public DisasterData() {
+        // Default constructor required for Firebase
     }
 
-    // Constructor
     public DisasterData(String location, String info, String center) {
         this.location = location;
         this.info = info;
         this.center = center;
     }
 
-    // Getter and Setter methods
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getLocation() {
         return location;
     }

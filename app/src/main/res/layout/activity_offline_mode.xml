@@ -28,4 +28,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Disaster Data" />
+
+    <Button
+        android:id="@+id/dashboardButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Go to Dashboard" />
+
+    <ListView
+        android:id="@+id/disaster_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:dividerHeight="1dp" />
 </LinearLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title for the dialog
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Disaster Data"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp" /> -->
+
+    <!-- Location Input -->
+    <EditText
+        android:id="@+id/edit_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        android:inputType="text" />
+        <!--android:padding="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:layout_marginBottom="8dp" /> -->
+
+    <!-- Information Input -->
+    <EditText
+        android:id="@+id/edit_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Information" />
+        <!--android:inputType="text"
+        android:padding="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:layout_marginBottom="8dp" />-->
+
+    <!-- Center Input -->
+    <EditText
+        android:id="@+id/edit_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Center"
+        android:inputType="text" />
+        <!--android:padding="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:layout_marginBottom="16dp" />-->
+
+    <!-- Update Button -->
+    <Button
+        android:id="@+id/update_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update" />
+        <!--android:backgroundTint="@color/design_default_color_primary"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:layout_marginTop="8dp" />-->
+</LinearLayout>
