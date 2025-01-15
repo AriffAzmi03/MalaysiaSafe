@@ -57,9 +57,13 @@ public class UserDashboardActivity extends AppCompatActivity {
                     break;
                 case 2: // Maps
                     // Navigate to MapsActivity
+                    Intent mapIntent = new Intent(UserDashboardActivity.this, MapsActivity.class);
+                    startActivity(mapIntent);
                     break;
                 case 3: // Information
                     // Navigate to InformationActivity
+                    Intent offlineIntent = new Intent(UserDashboardActivity.this, OfflineModeActivity.class);
+                    startActivity(offlineIntent);
                     break;
                 case 4: // Emergency
                     // Navigate to EmergencyActivity
