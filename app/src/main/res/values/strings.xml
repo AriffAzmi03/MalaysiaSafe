@@ -13,6 +13,13 @@
     <string name="hint_time">Enter time</string>
     <string name="hint_description">Enter description</string>
     <string name="submit_report">Submit Report</string>
+    <string name="severity">Severity</string>
+    <string name="location">Location</string>
+    <string name="type">Type</string>
+    <string name="description">Description</string>
+    <string name="time">Time</string>
+    <string name="todo">TODO</string>
+    <string name="make_a_report">MAKE A REPORT</string>
 
 
 </resources>

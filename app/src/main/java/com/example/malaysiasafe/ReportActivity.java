@@ -96,35 +96,20 @@ public class ReportActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
 
             @Override
-
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 reportList.clear();
-
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                     Report report = snapshot.getValue(Report.class);
-
                     if (report != null) {
-
+                        report.setId(snapshot.getKey());
                         reportList.add(report);
-
                     }
-
                 }
-
                 adapter.notifyDataSetChanged();
-
             }
-
-
-
             @Override
-
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 Toast.makeText(ReportActivity.this, "Failed to fetch reports: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
 
         });

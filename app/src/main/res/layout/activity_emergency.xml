@@ -144,21 +144,21 @@
             style="@style/RoundButton"
             android:text="Police"
             android:background="@drawable/round_button_white"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/buttonFire"
             style="@style/RoundButton"
             android:text="Fire"
             android:background="@drawable/round_button_white"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <Button
             android:id="@+id/buttonAmbulance"
             style="@style/RoundButton"
             android:text="Ambulance"
             android:background="@drawable/round_button_white"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
     </LinearLayout>
 
@@ -182,12 +182,13 @@
             style="@style/RoundActionButton"
             android:text="Call"
             android:background="@drawable/round_button_green"
-            android:textSize="18sp" />
+            android:textSize="14sp" />
 
         <Button
             android:id="@+id/clearButton"
             style="@style/RoundActionButton"
             android:text="Clear"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:textSize="14sp"/>
     </LinearLayout>
 </RelativeLayout>

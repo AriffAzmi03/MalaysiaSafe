@@ -124,7 +124,7 @@ public class ReportFormActivity extends AppCompatActivity {
 
         String[] locations = {
 
-                "Kuala Lumpur", "Penang", "Johor Bahru", "Melaka", "Ipoh", "Kota Kinabalu",
+                "Choose Location", "Kuala Lumpur", "Penang", "Johor Bahru", "Melaka", "Ipoh", "Kota Kinabalu",
 
                 "Kuching", "Shah Alam", "Putrajaya", "Seremban", "Alor Setar", "Sungai Petani"
 
@@ -133,14 +133,14 @@ public class ReportFormActivity extends AppCompatActivity {
 
         String[] disasterTypes = {
 
-                "Flood", "Landslide", "Haze", "Earthquake", "Forest Fire", "Storm", "Drought"
+                "Choose Type of Disaster", "Flood", "Landslide", "Haze", "Earthquake", "Forest Fire", "Storm", "Drought"
 
         };
 
 
         String[] severities = {
 
-                "Low", "Medium", "High", "Critical"
+                "Choose Level of Severity", "Low", "Medium", "High", "Critical"
 
         };
 
@@ -231,7 +231,7 @@ public class ReportFormActivity extends AppCompatActivity {
 
             if (imageUri != null) {
 
-                reportData.put("ImageUrl", imageUri.toString()); // Save the image URI as string
+                reportData.put("imageUrl", imageUri.toString()); // Save the image URI as string
 
             }
 
