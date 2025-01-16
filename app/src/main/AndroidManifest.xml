@@ -40,6 +40,14 @@
         <activity
             android:name=".UserDashboardActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".ReportActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ReportFormActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

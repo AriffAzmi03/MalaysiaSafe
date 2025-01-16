@@ -1,12 +1,8 @@
 package com.example.malaysiasafe;
 
-
-
 import android.os.Parcel;
 
 import android.os.Parcelable;
-
-
 
 public class Report implements Parcelable {
 
@@ -23,14 +19,14 @@ public class Report implements Parcelable {
     private String imageUrl;
 
 
-    // Default constructor required for Firebase
+// Default constructor required for Firebase
 
     public Report() {
 
     }
 
 
-    // Constructor
+// Constructor
 
     public Report(String location, String time, String type, String severity, String description, String imageUrl) {
 
@@ -49,7 +45,7 @@ public class Report implements Parcelable {
     }
 
 
-    // Parcelable implementation
+// Parcelable implementation
 
     protected Report(Parcel in) {
 
@@ -118,7 +114,7 @@ public class Report implements Parcelable {
     }
 
 
-    // Getters and setters
+// Getters and setters
 
     public String getLocation() {
 
@@ -204,7 +200,7 @@ public class Report implements Parcelable {
     }
 
 
-    // Validation method
+// Validation method
 
     public boolean isValid() {
 
@@ -221,7 +217,7 @@ public class Report implements Parcelable {
     }
 
 
-    // toString method for debugging
+// toString method for debugging
 
     @Override
 
@@ -244,5 +240,4 @@ public class Report implements Parcelable {
                 '}';
 
     }
-
 }

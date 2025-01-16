@@ -39,15 +39,15 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.constraintlayout.v214)
 
     // Firebase Authentication
-    implementation(platform("com.google.firebase:firebase-bom:33.7.0")) // Firebase BoM
-    implementation("com.google.firebase:firebase-auth") // Firebase Auth Dependency
-    implementation ("com.google.firebase:firebase-database")
+    implementation(platform(libs.firebase.bom)) // Firebase BoM
+    implementation(libs.google.firebase.auth) // Firebase Auth Dependency
+    implementation (libs.google.firebase.database)
     implementation(libs.firebase.storage)
 
-    implementation ("org.osmdroid:osmdroid-android:6.1.10")
+    implementation (libs.osmdroid.android)
 
 
     testImplementation(libs.junit)

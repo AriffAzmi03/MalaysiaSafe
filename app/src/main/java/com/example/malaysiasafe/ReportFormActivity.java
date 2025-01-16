@@ -1,59 +1,25 @@
 package com.example.malaysiasafe;
 
-
-
 import android.app.Activity;
-
 import android.content.Intent;
-
 import android.graphics.Bitmap;
-
 import android.net.Uri;
-
 import android.os.Bundle;
-
 import android.provider.MediaStore;
-
 import android.widget.Button;
-
 import android.widget.EditText;
-
 import android.widget.ImageView;
-
 import android.widget.Spinner;
-
 import android.widget.Toast;
-
 import android.widget.ArrayAdapter;
-
-
-
-
-
-import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-
-
 import com.google.firebase.auth.FirebaseAuth;
-
 import com.google.firebase.auth.FirebaseUser;
-
 import com.google.firebase.database.DatabaseReference;
-
 import com.google.firebase.database.FirebaseDatabase;
-
-
-
 import java.io.IOException;
-
 import java.util.HashMap;
-
-
-
 public class ReportFormActivity extends AppCompatActivity {
-
 
     private Spinner locationSpinner, typeSpinner, severitySpinner;
 
@@ -150,7 +116,7 @@ public class ReportFormActivity extends AppCompatActivity {
     }
 
 
-    // Setup the spinners with data
+// Setup the spinners with data
 
     private void setupSpinners() {
 
@@ -199,7 +165,7 @@ public class ReportFormActivity extends AppCompatActivity {
     }
 
 
-    // Opens the image chooser intent to pick an image from the gallery
+// Opens the image chooser intent to pick an image from the gallery
 
     private void openImageChooser() {
 
@@ -210,7 +176,7 @@ public class ReportFormActivity extends AppCompatActivity {
     }
 
 
-    // Handle the image selection result
+// Handle the image selection result
 
     @Override
 
@@ -240,26 +206,25 @@ public class ReportFormActivity extends AppCompatActivity {
     }
 
 
-    // Save report data to Firebase
+// Save report data to Firebase
 
     private void saveReport(String location, String type, String severity, String description, String time) {
 
         String reportId = databaseReference.push().getKey();
 
-
         if (reportId != null) {
 
             HashMap<String, String> reportData = new HashMap<>();
 
-            reportData.put("Location", location);
+            reportData.put("location", location);
 
-            reportData.put("Type", type);
+            reportData.put("type", type);
 
-            reportData.put("Severity", severity);
+            reportData.put("severity", severity);
 
-            reportData.put("Description", description);
+            reportData.put("description", description);
 
-            reportData.put("Time", time);
+            reportData.put("time", time);
 
 
             // You can add image URL or save it to Firebase Storage here if needed
@@ -292,6 +257,7 @@ public class ReportFormActivity extends AppCompatActivity {
         }
 
     }
+
 }
 
 
