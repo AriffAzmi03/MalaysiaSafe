@@ -19,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 // import com.example.malaysiasafe.model.DisasterData;
 import com.example.malaysiasafe.DisasterDataAdapter;
@@ -84,9 +86,13 @@ public class OfflineModeActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot snapshot) {
                 disasterList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    com.example.malaysiasafe.DisasterData disasterData = dataSnapshot.getValue(com.example.malaysiasafe.DisasterData.class);
-                    disasterData.setId(dataSnapshot.getKey());
-                    disasterList.add(disasterData);
+                    DisasterData disasterData = dataSnapshot.getValue(DisasterData.class);
+                    if (disasterData != null) {
+                        String id = dataSnapshot.getKey();
+                        disasterData.setId(dataSnapshot.getKey());
+                        disasterList.add(disasterData);
+                        System.out.println("Loaded disaster data with ID: " + id);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -116,4 +122,38 @@ public class OfflineModeActivity extends AppCompatActivity {
             }
         });
     }
+
+    // public void deleteDisasterData(String id, Object newLocation, Object newInfo, Object newCenter) {
+        // Access the specific child node by its ID and remove it
+    public void deleteDisasterData(String id) {
+        disasterDataRef.child(id).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // Notify the user of successful deletion
+                Toast.makeText(OfflineModeActivity.this, "Disaster data deleted successfully!", Toast.LENGTH_SHORT).show();
+            } else {
+                // Notify the user of the failure
+                Toast.makeText(OfflineModeActivity.this, "Failed to delete data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateDisasterData(String id, String newLocation, String newInfo, String newCenter) {
+        // Create a map to hold the updated values
+        if (id == null || id.isEmpty()) {
+            Map<String, Object> updates = new HashMap<>();
+        updates.put("location", newLocation);
+        updates.put("info", newInfo);
+        updates.put("center", newCenter);
+
+        // Access the specific child node by its ID and update its values
+        disasterDataRef.child(id).updateChildren(updates).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // Notify the user of successful update
+                Toast.makeText(OfflineModeActivity.this, "Disaster data updated successfully!", Toast.LENGTH_SHORT).show();
+            } else {
+                // Notify the user of the failure
+                Toast.makeText(OfflineModeActivity.this, "Failed to update data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }}
 }

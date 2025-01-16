@@ -1,23 +1,24 @@
 package com.example.malaysiasafe;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DisasterDataAdapter extends BaseAdapter {
     private final Context context;
@@ -46,7 +47,6 @@ public class DisasterDataAdapter extends BaseAdapter {
         return position;
     }
 
-    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -64,11 +64,28 @@ public class DisasterDataAdapter extends BaseAdapter {
         infoView.setText(disasterData.getInfo());
         centerView.setText(disasterData.getCenter());
 
-        // Handle delete action
-        deleteButton.setOnClickListener(view -> deleteDisasterData(disasterData.getId(), position));
+        // Delete Button
+        // deleteButton.setOnClickListener(v -> deleteDisasterData(disasterData.getId(), position));
+        // Inside DisasterDataAdapter
+        deleteButton.setOnClickListener(v -> {
+            String id = disasterData.getId(); // Get the ID of the disaster data
+            if (id != null && !id.isEmpty()) {
+                ((OfflineModeActivity) context).deleteDisasterData(id);  // Pass only the id here
+            } else {
+                Toast.makeText(context, "Invalid ID for deletion", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Handle update action
-        updateButton.setOnClickListener(view -> showUpdateDialog(disasterData));
+
+        // Update Button
+        updateButton.setOnClickListener(v -> {
+            String id = disasterData.getId();
+            if (id == null || id.isEmpty()) {
+                Toast.makeText(context, "Error: Cannot update data without a valid ID.", Toast.LENGTH_SHORT).show();
+            } else {
+                showUpdateDialog(disasterData);
+            }
+        });
 
         return convertView;
     }
@@ -76,11 +93,12 @@ public class DisasterDataAdapter extends BaseAdapter {
     private void deleteDisasterData(String id, int position) {
         disasterDataRef.child(id).removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                disasterList.remove(position); // Remove the item from the list
+                notifyDataSetChanged(); // Refresh the adapter
                 Toast.makeText(context, "Data deleted successfully", Toast.LENGTH_SHORT).show();
-                disasterList.remove(position);
-                notifyDataSetChanged();
             } else {
-                Toast.makeText(context, "Failed to delete data", Toast.LENGTH_SHORT).show();
+                String error = task.getException() != null ? task.getException().getMessage() : "Unknown error";
+                Toast.makeText(context, "Failed to delete data" + error, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -102,26 +120,40 @@ public class DisasterDataAdapter extends BaseAdapter {
 
         AlertDialog dialog = dialogBuilder.create();
 
-        updateButton.setOnClickListener(view -> {
+        updateButton.setOnClickListener(v -> {
             String newLocation = editLocation.getText().toString().trim();
             String newInfo = editInfo.getText().toString().trim();
             String newCenter = editCenter.getText().toString().trim();
 
             if (newLocation.isEmpty() || newInfo.isEmpty() || newCenter.isEmpty()) {
                 Toast.makeText(context, "All fields must be filled", Toast.LENGTH_SHORT).show();
-            } else {
-                disasterDataRef.child(disasterData.getId())
-                        .setValue(new DisasterData(newLocation, newInfo, newCenter))
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                                notifyDataSetChanged();
-                            } else {
-                                Toast.makeText(context, "Failed to update data", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                return;
             }
+            // Update Firebase and local list
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("location", newLocation);
+            updates.put("info", newInfo);
+            updates.put("center", newCenter);
+
+            Log.d("UpdateDebug", "Updating ID: " + disasterData.getId() + " with " + updates);
+
+            disasterDataRef.child(disasterData.getId()).updateChildren(updates)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Update the local list and refresh
+                            disasterData.setLocation(newLocation);
+                            disasterData.setInfo(newInfo);
+                            disasterData.setCenter(newCenter);
+                            notifyDataSetChanged();
+                            Log.d("UpdateSuccess", "Data updated for ID: " + disasterData.getId());
+                            Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        } else {
+                            String errorMessage = task.getException() != null ? task.getException().getMessage() : "Unknown error";
+                            Log.e("UpdateError", "Update failed for ID: " + disasterData.getId() + " Error: " + errorMessage);
+                            Toast.makeText(context, "Failed to update data" + errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
         dialog.show();
