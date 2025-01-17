@@ -66,6 +66,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     break;
                 case 5: // Support
                     // Navigate to SupportActivity
+                    Intent intent = new Intent(AdminDashboardActivity.this, ViewReportsActivity.class);
+                    startActivity(intent);
                     break;
                 default:
                     break;

@@ -54,6 +54,10 @@
             android:name=".ReportFormActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".ViewReportsActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
