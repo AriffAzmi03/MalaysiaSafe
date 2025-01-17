@@ -47,4 +47,10 @@ public class DisasterData {
     public void setCenter(String center) {
         this.center = center;
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + ", Location: " + location + ", Info: " + info + ", Center: " + center;
+    }
+
 }
